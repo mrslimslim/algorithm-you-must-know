@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const isAlienSorted = (words, order) => {
+            const dict = new Map();
+            for(let i = 0 ; i < order.length; i++){
+                dict.set(order[i], i);
+            }
+            dict.set(undefined, -1);
+            for(let i = 0; i < words.length - 1; i++){
+                let w1 = words[i], w2 = words[i + 1];
+                console.log(w1, w2);
+                let maxLen = Math.max(w1.length, w2.length);
+                for(let j = 0; j < maxLen; j++){
+                    if(w1[j] === w2[j]) continue
+                    if(dict.get(w1[j]) > dict.get(w2[j])){
+                        return false;
+                    }
+                    break
+                }
+            }
+            return true
+        }
+
+       const res = isAlienSorted(["word","world","row"], "worldabcefghijkmnpqstuvxyz")
+    </script>
+</body>
+</html>

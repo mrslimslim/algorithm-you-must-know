@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        const merge = (nums1, m, nums2, n) => {
+            nums1.splice(m, n, ...num2);
+            nums1.sort((a,b) => a - b);
+        }
+
+
+        const merge2 = (nums1, m, nums2, n) => {
+            let p1 = 0, p2 = 0;
+            const sorted = new Array(m+n).fill(0);
+            let cur ;
+            while(p1 < m || p2 < n){
+                if(p1 === m){
+                    cur = nums2[p2++];
+                }else if(p2 === n || nums1[p1] < nums2[p2]){
+                    cur = nums1[p1++];
+                }else {
+                    cur = nums2[p2++];
+                }
+                sorted[p1 + p2 -1] = cur
+            }
+            for(let i = 0; i < sorted.length; i++){
+                nums1[i] = sorted[i]
+            }
+        }
+
+    </script>
+</body>
+</html>
