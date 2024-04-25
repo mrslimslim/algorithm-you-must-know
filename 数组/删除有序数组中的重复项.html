@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 快慢指针的应用
+        // 单链表来说，大部分技巧都属于快慢指针
+        const removeDuplicates = (nums) => {
+            if(nums.length === 0){
+                return 0;
+            }
+            let slow, fast = 0;
+            while(fast < nums.length){
+                if(nums[slow] !== nums[fast]){
+                    slow++;
+                    nums[slow] = nums[fast];
+                }
+                fast++
+            }
+            return slow + 1;
+        }
+    </script>
+</body>
+</html>
