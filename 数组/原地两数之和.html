@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const twoSum = (nums, target) => {
+            let left = 0, right = nums.length - 1;
+            while(left < right){
+                const leftVal = nums[left], rightVal = nums[right];
+                if((leftVal + rightVal) === target) {
+                    return [left, right]
+                }else if ((leftVal + rightVal) > target){
+                    right--
+                }else {
+                    left++
+                }
+        }
+        return [-1, -1];
+    }
+    </script>
+</body>
+</html>

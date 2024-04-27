@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const isPalindrome = (s) => {
+            let left = 0, right = s.length -1;
+            while(left < right){
+                if(s[left] != s[right]){
+                    return false
+                }
+                left++;
+                right--;
+            }
+            return true
+        }
+    </script>
+</body>
+</html>
