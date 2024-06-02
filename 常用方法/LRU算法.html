@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
+<<<<<<< HEAD
         const LRU = () => {}
+=======
+        class LRU {
+            constructor(capacity) {
+                this.capacity = capacity;
+                this.cache = new Map();
+            }
+            get(key) {
+                if (!this.cache.has(key)) {
+                    return -1;
+                }
+                const value = this.cache.get(key);
+                this.cache.delete(key);
+                this.cache.set(key, value);
+                return value;
+            }
+            put(key, value) {
+                if (this.cache.has(key)) {
+                    this.cache.delete(key);
+                } else if (this.cache.size >= this.capacity) {
+                    // 删除最近最少使用的
+                    const firstKey = this.cache.keys().next().value;
+                    this.cache.delete(firstKey);
+                }
+                this.cache.set(key, value);
+            }
+
+        }
+>>>>>>> 7a312e8 (feat: 更新)
     </script>
 </body>
+
 </html>
