@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class ListNode {
+            constructor(value) {
+                this.value = value
+                this.next = null;
+            }
+        }
+        const mergeTwoList = function (l1, l2) {
+            const dummy = new ListNode(-1), head = dummy;
+            const p1 = l1, p2 = l2;
+            while (p1 !== null && p2 !== null) {
+                if (p1.value > p2.value) {
+                    head.next = p2;
+                    p2 = p2.next;
+                } else {
+                    head.next = p1;
+                    p1 = p1.next;
+                }
+                head = head.next;
+            }
+            if (l1 !== null) {
+                head.next = l1;
+            }
+            if (l2 !== null) {
+                head.next = l2;
+            }
+            return dummy.next;
+        }
+    </script>
+</body>
+
+</html>

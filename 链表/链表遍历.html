@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class ListNode {
+            constructor(value) {
+                this.value = value;
+                this.next = null;
+            }
+        }
+
+        const traverse = (head) => {
+            const p = head
+            while (p !== null) {
+                p = p.next;
+                console.log(p.value);
+            }
+        }
+    </script>
+</body>
+
+</html>
