@@ -1,12 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
+        // 浏览器控制并发
+        class Concurrency {
+            constructor(limit) {
+                this.limit = limit;
+                this.queue = [];
+                this.runCounts = 0;
+            }
+
+            add(task) {
+                this.queue.push(task);
+                this.next();
+            }
+
+            next() {
+                if (this.runCounts >= this.limit) {
+                    return;
+                }
+                if (this.queue.length === 0) {
+                    return;
+                }
+                const task = this.queue.shift();
+                task().then(() => {
+                    this.runCounts--;
+                    this.next();
+                });
+                this.runCounts++;
+            }
+
+            run() {
+                while (this.runCounts < this.limit && this.queue.length > 0) {
+                    const task = this.queue.shift();
+                    task().then(() => {
+                        this.runCounts--;
+                        this.next();
+                    });
+                    this.runCounts++;
+                }
+            }
+        }
+
+        const fn = () => {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log('done');
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        const withConcurrency = (fn, concurrency) => {
+            let pendingCount = 0; // 当前正在执行的任务数量
+            const queue = []; // 等待执行的任务队列
+
+            const wait = async () => {
+                if (pendingCount < concurrency) {
+                    return new Promise(resolve => queue.push(resolve)); // 如果未达到并发限制，将任务加入队列
+                }
+                return pendingCount++; // 如果达到并发限制，增加正在执行的任务计数
+            }
+
+            const signal = () => {
+                if (queue.length > 0) {
+                    return queue.shift().apply(); // 从队列中取出一个任务并执行
+                }
+                pendingCount--; // 如果队列为空，减少正在执行的任务计数
+            }
+
+            return async (...args) => {
+                await wait(); // 等待执行条件
+                try {
+                    return await fn(...args); // 执行传入的异步函数
+                } finally {
+                    signal(); // 执行完毕后，通知下一个任务
+                }
+            }
+        };
+
+        const rawDownload = async (url) => { return new Promise(resolve => setTimeout(() => resolve(url), 1000)) }
+
+        const N = 3
+
+        const download = withConcurrency(rawDownload, N)
+
+        for (let i = 0; i < 10; ++i) download(i).then(console.log)
     </script>
 </body>
+
 </html>

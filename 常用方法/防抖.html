@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const array = [
+            { id: 1, name: 'i1' },
+            { id: 2, name: 'i2', parentId: 1 },
+            { id: 4, name: 'i4', parentId: 3 },
+            { id: 3, name: 'i3', parentId: 2 },
+            { id: 8, name: 'i8', parentId: 7 }
+        ];
+        const getChildren = (data, result, pId) => {
+            // 遍历 data 数组中的每个 item
+            for (const item of data) {
+                // 如果 item 的 parentId 等于 pId，表示该 item 是当前层级的子节点
+                if (item.parentId === pId) {
+                    // 创建一个新的对象 newItem，包含 item 的所有属性，并添加一个空的 children 数组
+                    const newItem = { ...item, children: [] };
+                    // 将 newItem 添加到 result 数组中
+                    result.push(newItem);
+                    // 递归调用 getChildren，处理当前节点的子节点
+                    getChildren(data, newItem.children, item.id);
+                }
+            }
+        }
+
+        const arrayToTree = (items) => {
+            const itemMap = {};
+            const result = [];
+            for (const item of items) {
+                itemMap[item.id] = { ...item, children: [] };
+            }
+
+            for (const item of items) {
+                const id = item.id;
+                const parentId = item.parentId;
+                const treeItem = itemMap[item.id];
+                if (parentId) {
+                    itemMap[item.parentId].children.push(treeItem)
+                } else if (!id) {
+                    result.push(treeItem)
+                }
+            }
+            return result;
+        }
+    </script>
+</body>
+
+</html>
