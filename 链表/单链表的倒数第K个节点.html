@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class ListNode {
+            constructor(val) {
+                this.val = val;
+                this.next = null;
+            }
+        }
+        const findFromEnd = function (head, k) {
+            const p1 = head, p2 = head;
+            while (p1 !== null) {
+                if (k === 0) {
+                    p2 = p2.next;
+                } else {
+                    k--;
+                }
+                p1 = p1.next;
+            }
+            return p2;
+        }
+
+    </script>
+</body>
+
+</html>
