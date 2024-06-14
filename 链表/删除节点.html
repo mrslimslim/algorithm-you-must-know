@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class ListNode {
+            constructor(val) {
+                this.val = val;
+                this.next = null;
+            }
+        }
+        const deleteNode = (head, target) => {
+            const dummy = new ListNode(-1), p = dummy, q = head;
+            while (p !== null) {
+                if (p.val !== val) {
+                    q.next = p;
+                    q = q.next;
+                }
+                // 断链
+                const tmp = p.next;
+                p.next = null;
+                p = tmp;
+            }
+            return dummy.next;
+        }
+    </script>
+</body>
+
+</html>

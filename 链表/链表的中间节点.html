@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class ListNode {
+            constructor(val) {
+                this.val = val;
+                this.next = null
+            }
+        }
+        const middleNode = (head) => {
+            let slow = head, fast = head;
+            if (fast !== null & fast.next !== null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return slow;
+        }
+    </script>
+</body>
+
+</html>
