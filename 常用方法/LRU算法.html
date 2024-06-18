@@ -36,6 +36,38 @@
             }
 
         }
+
+        // lru
+        // 类似手机的后台
+        // 1. 新增，如果在堆栈中则前置，如果不在堆栈中则新增，且删除第一个
+        // 2. 查询，不在堆栈则返回-1，在则返回
+        class LRU_new {
+            constructor(capacity) {
+                this.capacity = capacity;
+                this.cache = new Map();
+            }
+
+            put(key, value) {
+                if (this.cache.has(key)) {
+                    this.cache.delete(key);
+                }
+                if (this.cache.size() >= this.capacity) {
+                    const firstKey = this.cache.keys().next().value;
+                    this.cache.delete(firstKey);
+                }
+                this.cache.set(key, value)
+            }
+
+            get(key) {
+                if (!this.cache.has(key)) {
+                    return -1;
+                }
+                const value = this.cache.get(key);
+                this.cache.delete(key);
+                this.cache.set(key, value);
+                return value;
+            }
+        }
     </script>
 </body>
 

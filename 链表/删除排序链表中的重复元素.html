@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class ListNode {
+            constructor(val) {
+                this.val = val;
+                this.next = null
+            }
+        }
+
+        // https://labuladong.online/algo/essential-technique/array-two-pointers-summary/#%E4%B8%80%E3%80%81%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7
+        const removeDuplicates = (head) => {
+            let fast = head, slow = head, count = 0;
+            if (head === null) return null;
+            while (fast != null) {
+                if (fast.val != slow.val) {
+                    // nums[slow] = nums[fast];
+                    slow.next = fast;
+
+                    slow = slow.next;
+                }
+                fast = fast.next;
+            }
+            slow.next = null;
+            return head;
+        }
+    </script>
+</body>
+
+</html>

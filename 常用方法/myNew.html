@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const myNew = (constructor, ...args) => {
+            const obj = {};
+            Object.setPrototypeOf(obj, constructor.prototype);
+            const res = constructor.call(obj, ...args);
+            if ((typeof res === 'object' && res !== null) || typeof res === 'function') return res;
+            return obj;
+        }
+    </script>
+</body>
+
+</html>
