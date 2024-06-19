@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         const reverseString = (s) => {
             let left = 0, right = s.length - 1;
-            while(left < right){
-                [nums[left], nums[right]] = [nums[right], nums[left] ]
+            while (left < right) {
+                [nums[left], nums[right]] = [nums[right], nums[left]]
                 left++;
                 right--;
             }
         }
+
+
+        const reverseString_new = (s) => {
+            let left = 0, right = s.length - 1;
+            while (left < right) {
+                let tmp = s[left];
+                s[left] = s[right];
+                s[right] = tmp;
+                left++;
+                right++;
+            }
+        }
+
     </script>
 </body>
+
 </html>
