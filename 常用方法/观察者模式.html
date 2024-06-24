@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Observer {
+            constructor() {
+                this.events = new Map()
+            }
+
+            on(type, fn) {
+                if (!this.events.has(type)) {
+                    this.events.set(type, []);
+                }
+                this.events.get(type).push(fn)
+            }
+
+            emit(type, ...args) {
+                if (this.events.has(type)) {
+                    this.events.get(type).forEach(fn => fn(...args));
+                }
+            }
+
+            off(type, callback) {
+                if (this.events.has(type)) {
+                    const filterFns = this.events.get(type).filter(fn => fn !== callback);
+                    this.events.set(type, filterFns);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
